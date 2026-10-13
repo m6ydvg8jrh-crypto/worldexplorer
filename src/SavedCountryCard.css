@@ -1,0 +1,78 @@
+
+.saved-country-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px;
+    background: #151f32;
+    border: 1px solid #34415b;
+    border-radius: 16px;
+    transition: border-color 0.2s;
+  }
+  
+  .saved-country-card:hover {
+    border-color: #747bd8;
+  }
+  
+  .saved-country-details {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .saved-country-flag {
+    font-size: 36px;
+    line-height: 1;
+  }
+  
+  .saved-country-details h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #f8fafc;
+  }
+  
+  .saved-country-details p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 12px;
+  }
+  
+  .saved-country-status {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .saved-country-status.visited {
+    background: rgba(52, 211, 153, 0.12);
+    color: #6ee7b7;
+  }
+  
+  .saved-country-status.wishlist {
+    background: rgba(165, 180, 252, 0.12);
+    color: #c7d2fe;
+  }
+  
+  .saved-country-delete {
+    padding: 9px 12px;
+    border: 1px solid #693949;
+    border-radius: 8px;
+    background: rgba(185, 28, 28, 0.13);
+    color: #fca5a5;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .saved-country-delete:hover {
+    background: rgba(185, 28, 28, 0.26);
+  }
+  
+  .saved-country-delete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
