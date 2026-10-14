@@ -1,136 +1,340 @@
 
 # 🌍 WorldExplorer
 
-WorldExplorer – individualus mokomasis internetinės
-aplikacijos projektas, skirtas pasaulio valstybių
-pažinimui ir asmeninio kelionių sąrašo kūrimui.
+**WorldExplorer** – mokomasis internetinės aplikacijos projektas, skirtas pasaulio valstybių pažinimui ir asmeninių kelionių sąrašų kūrimui.
 
-## Projekto tikslas
+Vartotojai gali ieškoti pasaulio valstybių, peržiūrėti jų informaciją, žymėti aplankytas ir planuojamas aplankyti valstybes bei stebėti savo kelionių statistiką.
 
-Sukurti modernią, patogią aplikaciją, kurioje
-vartotojas galėtų ieškoti pasaulio valstybių,
-peržiūrėti jų informaciją ir pažymėti aplankytas
-arba norimas aplankyti valstybes.
+**Veikianti aplikacija:**  
+https://worldexplorer-three.vercel.app
 
-## Naudojamos technologijos
+## 🎯 Projekto tikslas
 
-- JavaScript
-- React
-- Vite
-- CSS
-- Supabase Database (PostgreSQL)
-- Supabase Edge Functions
-- REST Countries API v5
-- Git ir GitHub
+Sukurti modernią, patogią ir mobiliems įrenginiams pritaikytą internetinę aplikaciją, kurioje vartotojas galėtų:
 
-## MVP funkcionalumas
+- Atrasti pasaulio valstybes.
+- Peržiūrėti informaciją apie pasirinktas valstybes.
+- Susikurti asmeninę paskyrą.
+- Išsaugoti aplankytas ir norimas aplankyti valstybes.
+- Valdyti savo kelionių sąrašą.
+- Stebėti kelionių statistiką.
 
-- Valstybių paieška pagal pavadinimą
-- Valstybės vėliavos rodymas
-- Sostinės, regiono ir gyventojų skaičiaus rodymas
-- Valstybių žymėjimas kaip aplankytų
-- Norimų aplankyti valstybių išsaugojimas
-- Išsaugotų valstybių statuso keitimas
-- Valstybių pašalinimas iš sąrašo
-- Filtravimas pagal statusą
-- Kelionių statistika
-- Prisitaikantis Dark Explorer dizainas
+Projektas sukurtas mokymosi tikslais, naudojant React ir Supabase technologijas.
 
-## Aplikacijos veikimas
+## 🛠️ Naudojamos technologijos
 
-React frontend siunčia valstybių paieškos
-užklausą į Supabase Edge Function
-`get-countries`.
+### Frontend
+- **React** – vartotojo sąsajos kūrimui.
+- **Vite** – projekto kūrimui ir kompiliavimui.
+- **JavaScript** – aplikacijos logikai.
+- **CSS** – dizainui ir prisitaikymui prie skirtingų ekranų.
 
-Ši funkcija naudoja REST Countries API v5
-ir grąžina valstybių duomenis.
+### Backend ir duomenų bazė
+- **Supabase PostgreSQL** – vartotojų kelionių duomenims saugoti.
+- **Supabase Authentication** – registracijai ir prisijungimui.
+- **Supabase Edge Functions** – serverio pusės API užklausoms.
+- **Row Level Security (RLS)** – vartotojų duomenų atskyrimui.
+- **REST Countries API v5** – pasaulio valstybių informacijai gauti.
 
-Išsaugotos valstybės laikomos Supabase
-PostgreSQL duomenų bazėje.
+### Versijų valdymas ir publikavimas
+- **Git** – projekto versijų valdymui.
+- **GitHub** – kodo saugojimui.
+- **Vercel** – aplikacijos publikavimui internete.
+- **Cursor** – programavimo aplinka.
 
-Duomenų kūrimas, atnaujinimas ir trynimas
-vykdomas per `manage-countries` Edge Function,
-kuri tikrina administratoriaus slaptažodį.
+## ✨ Pagrindinės funkcijos
 
-## Duomenų bazė
+### 1. Valstybių paieška
 
-Lentelė: `saved_countries`
+- Paieška pagal lietuviškus ir angliškus valstybių pavadinimus.
+- Valstybių vėliavų atvaizdavimas.
+- Sostinės rodymas.
+- Regiono rodymas.
+- Gyventojų skaičiaus rodymas.
+- Valstybės ISO kodo rodymas.
+
+Pavyzdžiui, vartotojas gali ieškoti „Graikija“ arba „Greece“.
+
+### 2. Lietuviški pavadinimai
+
+Aplikacijoje naudojami:
+
+- Lietuviški valstybių pavadinimai.
+- Lietuviški regionų pavadinimai.
+- Lietuviški daugelio pasaulio sostinių pavadinimai.
+
+Vertimams naudojami `Intl.DisplayNames` ir papildomi JavaScript žodynai.
+
+### 3. Registracija ir prisijungimas
+
+- Naujos paskyros sukūrimas.
+- Prisijungimas el. paštu ir slaptažodžiu.
+- Atsijungimas.
+- Asmeninės vartotojo sesijos išsaugojimas.
+
+Autentifikacijai naudojamas **Supabase Authentication**.
+
+### 4. Asmeninis kelionių sąrašas
+
+Prisijungęs vartotojas gali:
+
+- Pažymėti valstybę kaip aplankytą.
+- Įtraukti valstybę į norimų aplankyti sąrašą.
+- Pakeisti valstybės statusą.
+- Pašalinti valstybę.
+- Matyti anksčiau išsaugotus įrašus.
+
+Kiekvienas vartotojas gali pasiekti tik savo duomenis.
+
+### 5. Filtravimas
+
+Valstybės filtruojamos pagal tris kategorijas:
+
+- **Visos** – visi išsaugoti įrašai.
+- **Aplankytos** – jau aplankytos valstybės.
+- **Planuojamos** – norimos aplankyti valstybės.
+
+### 6. Kelionių statistika
+
+Aplikacija pateikia:
+
+- Aplankytų valstybių skaičių.
+- Planuojamų aplankyti valstybių skaičių.
+- Bendrą išsaugotų valstybių skaičių.
+
+### 7. Prisitaikantis dizainas
+
+WorldExplorer naudoja tamsų **Dark Explorer** dizainą.
+
+Pagrindiniai dizaino elementai:
+
+- Navigacijos juosta.
+- Hero sekcija su panoramine nuotrauka.
+- Valstybių informacijos kortelės.
+- Kelionių statistikos kortelės.
+- Valstybių filtrai.
+- Prisijungimo ir registracijos langas.
+
+Dizainas pritaikytas kompiuteriams, planšetėms ir telefonams.
+
+## ⚙️ Aplikacijos veikimo principas
+
+Valstybių paieška veikia tokia seka:
+
+1. Vartotojas įveda valstybės pavadinimą.
+2. React aplikacija prireikus pakeičia lietuvišką pavadinimą į API suprantamą variantą.
+3. Užklausa siunčiama į Supabase Edge Function `get-countries`.
+4. Edge Function kreipiasi į REST Countries API v5.
+5. Gautas rezultatas perduodamas React aplikacijai.
+6. Vartotojui parodoma valstybės informacijos kortelė.
+
+Asmeninių kelionių duomenys valdomi kitaip:
+
+1. Vartotojas prisijungia per Supabase Authentication.
+2. React aplikacija kreipiasi į Supabase duomenų bazę.
+3. RLS taisyklės apriboja prieigą pagal vartotojo ID.
+4. Vartotojas mato ir keičia tik savo įrašus.
+
+## 🗄️ Duomenų bazė
+
+Naudojama PostgreSQL lentelė:
+
+`saved_countries`
 
 | Laukas | Tipas | Paskirtis |
 |---|---|---|
-| id | UUID | Unikalus identifikatorius |
+| id | UUID | Unikalus įrašo identifikatorius |
+| user_id | UUID | Prisijungusio vartotojo ID |
 | country_code | TEXT | ISO valstybės kodas |
-| status | TEXT | visited arba wishlist |
-| created_at | TIMESTAMPTZ | Sukūrimo data |
+| status | TEXT | `visited` arba `wishlist` |
+| created_at | TIMESTAMPTZ | Įrašo sukūrimo laikas |
 
-Duomenų bazei naudojamas Row Level Security (RLS).
+Duomenų bazėje įjungtas **Row Level Security (RLS)**.
 
-## Projekto paleidimas
+RLS taisyklės leidžia prisijungusiam vartotojui skaityti, pridėti, atnaujinti ir trinti tik savo įrašus.
 
-Reikalinga Node.js ir npm aplinka.
+Vienas vartotojas gali turėti vieną įrašą konkrečiai valstybei, tačiau ta pati valstybė gali būti išsaugota skirtingų vartotojų sąrašuose.
 
-1. Atsisiųsti projektą iš GitHub.
-2. Terminale atidaryti projekto aplanką.
-3. Įdiegti priklausomybes:
+Pradinė duomenų bazės schema pateikta faile:
+
+`supabase/migrations/001_create_saved_countries.sql`
+
+## 📁 Projekto struktūra
+
+```text
+worldexplorer/
+├── public/
+│   └── worldexplorer-europe-hero.png
+│
+├── src/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── Auth.jsx
+│   ├── Auth.css
+│   ├── CountryCard.jsx
+│   ├── CountryCard.css
+│   ├── CountryFilter.jsx
+│   ├── CountryFilter.css
+│   ├── CountryNames.js
+│   ├── CapitalNames.js
+│   ├── SavedCountryCard.jsx
+│   ├── SavedCountryCard.css
+│   ├── TravelStats.jsx
+│   ├── TravelStats.css
+│   ├── supabaseClient.js
+│   ├── index.css
+│   └── main.jsx
+│
+├── supabase/
+│   ├── functions/
+│   │   └── get-countries/
+│   │       └── index.ts
+│   └── migrations/
+│       └── 001_create_saved_countries.sql
+│
+├── AGENTS.MD
+├── package.json
+├── index.html
+└── README.md
+```
+
+## 🚀 Projekto paleidimas
+
+### Reikalavimai
+
+Kompiuteryje turi būti įdiegta:
+
+- Node.js
+- npm
+- Git
+
+### 1. Atsisiųskite projektą
+
+```bash
+git clone <REPOSITORY_URL>
+```
+
+`<REPOSITORY_URL>` pakeiskite tikru GitHub saugyklos adresu.
+
+### 2. Atidarykite projekto aplanką
+
+```bash
+cd worldexplorer
+```
+
+Aplanko pavadinimas priklauso nuo atsisiųstos saugyklos pavadinimo.
+
+### 3. Įdiekite priklausomybes
 
 ```bash
 npm install
 ```
 
-4. Sukurti `.env.local` failą:
+Ši komanda įdiegia projekto bibliotekas pagal `package.json`.
+
+### 4. Sukurkite `.env.local`
+
+Pagrindiniame projekto aplanke sukurkite failą:
+
+`.env.local`
+
+Įrašykite:
 
 ```env
-VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
 ```
 
-5. Paleisti projektą:
+Reikšmes pakeiskite savo Supabase projekto duomenimis.
+
+**Svarbu:** `VITE_` kintamieji pasiekiami naršyklėje, todėl čia galima naudoti tik viešąjį Supabase raktą. Slaptųjų raktų ir administratoriaus prisijungimo duomenų įrašyti negalima.
+
+### 5. Paleiskite aplikaciją
 
 ```bash
 npm run dev
 ```
 
-6. Atidaryti terminale pateiktą vietinį adresą.
+Terminale bus pateiktas vietinis adresas, paprastai:
 
-Norint naudotis veikiančiomis API funkcijomis,
-reikalingas sukonfigūruotas Supabase projektas,
-Edge Functions ir REST Countries API raktas.
+`http://localhost:5173`
 
-## Testavimas
+Atidarykite jį naršyklėje.
 
-Patikrintas šis funkcionalumas:
+### 6. Sukurkite produkcinę versiją
 
-- Valstybių paieška
-- API duomenų atvaizdavimas
-- Valstybių išsaugojimas
-- Statuso keitimas
-- Valstybių filtravimas
-- Duomenų išlikimas perkrovus puslapį
-- Valstybių pašalinimas
-- Klaidų apdorojimas
+```bash
+npm run build
+```
 
-Visi 8 pagrindiniai MVP testai atlikti sėkmingai.
+Ši komanda sukuria optimizuotus aplikacijos failus `dist` aplanke.
 
-## Saugumas
+## ☁️ Supabase konfigūracija
 
-Projektas skirtas mokymuisi ir demonstracijai.
+Norint paleisti projektą su atskiru Supabase projektu, reikia:
 
-- REST Countries API raktas saugomas
-  Supabase Secrets.
-- Supabase duomenų bazėje įjungtas RLS.
-- Duomenų keitimui naudojama serverio funkcija.
-- Administratoriaus slaptažodis tikrinamas
-  serverio pusėje.
-- `.env.local` nėra keliamas į GitHub.
+1. Sukurti Supabase projektą.
+2. Paruošti `saved_countries` lentelę ir RLS taisykles.
+3. Sukonfigūruoti Supabase Authentication.
+4. Publikuoti `get-countries` Edge Function.
+5. Supabase Secrets saugykloje nustatyti `REST_COUNTRIES_API_KEY`.
+6. Pridėti naudojamą svetainės adresą prie Edge Function CORS leidžiamų adresų.
+7. Sukonfigūruoti frontend aplinkos kintamuosius.
 
-Prieš viešą publikavimą būtina sustiprinti
-autentifikaciją, užklausų ribojimą ir CORS
-nustatymus.
+**Pastaba:** esamos duomenų bazės nereikėtų atkurti iš pradinės SQL schemos, jeigu lentelės ir taisyklės jau sukurtos. Pradinė schema skirta naujam projektui.
 
-## Projekto statusas
+## 🔐 Saugumas
 
-MVP sukurtas ir išbandytas.
+Projekte taikomos šios priemonės:
 
-Frontend dizainas: Dark Explorer.
+- Vartotojų autentifikacija per Supabase Authentication.
+- Prieigos prie įrašų ribojimas per RLS.
+- API rakto laikymas Supabase Secrets.
+- Viešojo ir slaptojo API rakto atskyrimas.
+- `.env.local` neįtraukiamas į GitHub.
+- Edge Function naudojamas leidžiamų CORS adresų sąrašas.
+- Pašalinta anksčiau naudota administratoriaus slaptažodžiu apsaugota `manage-countries` funkcija.
 
-Projekto tipas: individualus mokomasis projektas.
+Projektas yra mokomasis. Prieš platesnį viešą naudojimą papildomai rekomenduojama įjungti el. pašto patvirtinimą, užklausų ribojimą ir atlikti saugumo testus.
+
+## 🧪 Testavimas
+
+Kūrimo metu patikrinta:
+
+- Valstybių paieška lietuvių ir anglų kalbomis.
+- Valstybių informacijos rodymas.
+- Lietuviški valstybių ir sostinių pavadinimai.
+- Registracija ir prisijungimas.
+- Atsijungimas.
+- Asmeninių valstybių išsaugojimas.
+- Valstybių statuso keitimas.
+- Įrašų pašalinimas.
+- Filtravimas.
+- Kelionių statistika.
+- Skirtingų vartotojų duomenų atskyrimas.
+- Produkcinis kompiliavimas su `npm run build`.
+- Valstybių paieška Vercel svetainėje.
+
+## 🌐 Publikavimas
+
+Projekto kodas saugomas GitHub.
+
+Aplikacija publikuota naudojant Vercel, o backend funkcijos ir duomenų bazė veikia Supabase aplinkoje.
+
+**WorldExplorer:**  
+https://worldexplorer-three.vercel.app
+
+## 📌 Projekto statusas
+
+**MVP sukurtas ir veikia.**
+
+Projektas skirtas praktiniam React, JavaScript, Supabase, GitHub ir Vercel technologijų mokymuisi.
+
+Galimos tolesnės plėtros kryptys:
+
+- Interaktyvus pasaulio žemėlapis.
+- Valstybių paieškos pasiūlymai įvedant tekstą.
+- Kelionių nuotraukų pridėjimas.
+- Aplankytų valstybių žymėjimas žemėlapyje.
+- Papildoma vartotojo profilio informacija.
+```
