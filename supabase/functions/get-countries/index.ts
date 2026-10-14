@@ -1,6 +1,7 @@
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://worldexplorer-three.vercel.app",
   "https://worldexplorer-c3f533h14-codeacademy1.vercel.app",
 ];
 
@@ -24,7 +25,6 @@ function getCorsHeaders(req: Request) {
 Deno.serve(async (req: Request) => {
   const corsHeaders = getCorsHeaders(req);
 
-  // Naršyklės CORS patikrinimas
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -32,7 +32,6 @@ Deno.serve(async (req: Request) => {
     });
   }
 
-  // Leidžiame tik GET užklausas
   if (req.method !== "GET") {
     return Response.json(
       { error: "Method not allowed" },
@@ -41,13 +40,11 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    // Gauname valstybės pavadinimą
     const url = new URL(req.url);
 
     const countryName =
       url.searchParams.get("name")?.trim() || "Lithuania";
 
-    // Tikriname įvesties ilgį
     if (countryName.length > 100) {
       return Response.json(
         { error: "Valstybės pavadinimas per ilgas" },
@@ -55,7 +52,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Slaptasis API raktas lieka Supabase Secrets
     const apiKey = Deno.env.get("REST_COUNTRIES_API_KEY");
 
     if (!apiKey) {
@@ -65,7 +61,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Siunčiame užklausą valstybių API
     const response = await fetch(
       `https://api.restcountries.com/countries/v5/names.common/${encodeURIComponent(countryName)}`,
       {
