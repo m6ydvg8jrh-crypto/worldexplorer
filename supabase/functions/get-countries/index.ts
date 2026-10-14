@@ -1,66 +1,90 @@
 
-const corsHeaders = {
-    "Access-Control-Allow-Origin": "http://localhost:5173",
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://worldexplorer-c3f533h14-codeacademy1.vercel.app",
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("origin");
+
+  const headers: Record<string, string> = {
     "Access-Control-Allow-Headers":
       "authorization, x-client-info, apikey, content-type",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Vary": "Origin",
   };
-  
-  Deno.serve(async (req) => {
-    // Naršyklės CORS patikrinimas
-    if (req.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: corsHeaders,
-      });
-    }
-  
-    try {
-      // Gauname valstybės pavadinimą
-      const url = new URL(req.url);
-  
-      const countryName =
-        url.searchParams.get("name")?.trim() || "Lithuania";
-  
-      // Tikriname įvesties ilgį
-      if (countryName.length > 100) {
-        return Response.json(
-          { error: "Valstybės pavadinimas per ilgas" },
-          { status: 400, headers: corsHeaders }
-        );
-      }
-  
-      // Gauname API raktą iš Supabase Secrets
-      const apiKey = Deno.env.get("REST_COUNTRIES_API_KEY");
-  
-      if (!apiKey) {
-        return Response.json(
-          { error: "API key not configured" },
-          { status: 500, headers: corsHeaders }
-        );
-      }
-  
-      // Gauname valstybės informaciją
-      const response = await fetch(
-        `https://api.restcountries.com/countries/v5/names.common/${encodeURIComponent(countryName)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
-        }
-      );
-  
-      const data = await response.json();
-  
-      return Response.json(data, {
-        status: response.status,
-        headers: corsHeaders,
-      });
-    } catch (error) {
+
+  if (origin && allowedOrigins.includes(origin)) {
+    headers["Access-Control-Allow-Origin"] = origin;
+  }
+
+  return headers;
+}
+
+Deno.serve(async (req: Request) => {
+  const corsHeaders = getCorsHeaders(req);
+
+  // Naršyklės CORS patikrinimas
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+
+  // Leidžiame tik GET užklausas
+  if (req.method !== "GET") {
+    return Response.json(
+      { error: "Method not allowed" },
+      { status: 405, headers: corsHeaders }
+    );
+  }
+
+  try {
+    // Gauname valstybės pavadinimą
+    const url = new URL(req.url);
+
+    const countryName =
+      url.searchParams.get("name")?.trim() || "Lithuania";
+
+    // Tikriname įvesties ilgį
+    if (countryName.length > 100) {
       return Response.json(
-        { error: String(error) },
+        { error: "Valstybės pavadinimas per ilgas" },
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    // Slaptasis API raktas lieka Supabase Secrets
+    const apiKey = Deno.env.get("REST_COUNTRIES_API_KEY");
+
+    if (!apiKey) {
+      return Response.json(
+        { error: "API key not configured" },
         { status: 500, headers: corsHeaders }
       );
     }
-  });
-  
+
+    // Siunčiame užklausą valstybių API
+    const response = await fetch(
+      `https://api.restcountries.com/countries/v5/names.common/${encodeURIComponent(countryName)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    return Response.json(data, {
+      status: response.status,
+      headers: corsHeaders,
+    });
+  } catch (error) {
+    return Response.json(
+      { error: String(error) },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+});

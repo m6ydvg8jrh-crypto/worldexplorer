@@ -1,0 +1,95 @@
+
+/* WORLDEXPLORER – VALSTYBIŲ FILTRAI */
+
+.country-filter {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    max-width: 100%;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    background: rgba(10, 20, 39, 0.9);
+  }
+  
+  .country-filter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 43px;
+    padding: 11px 18px;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    background: transparent;
+    color: #a9b8cf;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .country-filter-button:hover {
+    color: #fff;
+    background: rgba(59, 130, 246, 0.13);
+  }
+  
+  .country-filter-button.active {
+    color: #fff;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    border-color: rgba(147, 197, 253, 0.4);
+    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.2);
+  }
+  
+  .filter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+  .country-filter-button:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 3px;
+  }
+  
+  /* MOBILŪS ĮRENGINIAI */
+  
+  @media (max-width: 600px) {
+    .country-filter {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 5px;
+      padding: 5px;
+    }
+  
+    .country-filter-button {
+      flex: 1 1 auto;
+      padding: 10px 9px;
+      min-width: 0;
+      font-size: 12px;
+      gap: 5px;
+    }
+  
+    .filter-icon {
+      font-size: 15px;
+      width: 15px;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .country-filter-button {
+      flex-basis: 100%;
+    }
+  }
+  

@@ -1,128 +1,444 @@
 
-/* DARK EXPLORER – COUNTRY CARD */
+/* WORLD EXPLORER – VALSTYBĖS KORTELĖ */
 
 .country-card {
-    width: 100%;
-    max-width: 380px;
-    padding: 20px;
-    background: linear-gradient(
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  overflow: hidden;
+  color: #f8fafc;
+
+  background: linear-gradient(
+    145deg,
+    rgba(22, 37, 61, 0.96),
+    rgba(9, 18, 34, 0.98)
+  );
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 26px;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.country-card:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.34);
+}
+
+/* KAIRIOJI VIZUALINĖ DALIS */
+
+.country-card-visual {
+  position: relative;
+  min-height: 500px;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(59, 130, 246, 0.32),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 75% 80%,
+      rgba(139, 92, 246, 0.22),
+      transparent 45%
+    ),
+    linear-gradient(
       145deg,
-      #1b2942,
-      #111a2c
+      #101e36,
+      #091326
     );
-    border: 1px solid #34435e;
+
+  border-right: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.country-visual-glow {
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  background: rgba(96, 165, 250, 0.12);
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.country-visual-label {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+
+  padding: 9px 14px;
+  border-radius: 999px;
+
+  color: #bfdbfe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(96, 165, 250, 0.24);
+}
+
+.country-flag-frame {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 310px);
+  aspect-ratio: 4 / 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  border-radius: 22px;
+
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.38),
+    0 0 35px rgba(59, 130, 246, 0.12);
+}
+
+.country-flag {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.country-no-flag {
+  font-size: 90px;
+}
+
+.country-visual-bottom {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.country-code-badge {
+  padding: 10px 15px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #bfdbfe;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.country-visual-caption {
+  color: #cbd5e1;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* DEŠINIOJI INFORMACIJOS DALIS */
+
+.country-card-content {
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.country-eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.country-card-header h2 {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 850;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.country-region {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 15px;
+}
+
+.country-region-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #60a5fa;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.65);
+}
+
+/* INFORMACIJOS BLOKAI */
+
+.country-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.country-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+  padding: 17px 14px;
+
+  border-radius: 15px;
+
+  background: rgba(15, 23, 42, 0.58);
+  border: 1px solid rgba(148, 163, 184, 0.13);
+}
+
+.country-info-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+  font-size: 20px;
+
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.country-info-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.country-info-text span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.country-info-text strong {
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* MYGTUKŲ BLOKAS */
+
+.country-actions-heading {
+  margin-top: 30px;
+}
+
+.country-actions-heading h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.country-actions-heading p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.country-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.country-actions button {
+  min-height: 52px;
+  padding: 12px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.country-actions button span {
+  font-size: 19px;
+}
+
+.country-action-visited {
+  background: linear-gradient(
+    135deg,
+    #059669,
+    #047857
+  );
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  color: #ffffff;
+}
+
+.country-action-wishlist {
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #7c3aed
+  );
+  border: 1px solid rgba(165, 180, 252, 0.4);
+  color: #ffffff;
+}
+
+.country-actions button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+.country-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* PRANEŠIMAI */
+
+.country-message {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.country-message.success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.24);
+  color: #a7f3d0;
+}
+
+.country-message.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.24);
+  color: #fca5a5;
+}
+
+/* PLANŠETĖS */
+
+@media (max-width: 950px) {
+  .country-card {
+    grid-template-columns: 1fr;
+  }
+
+  .country-card-visual {
+    min-height: 350px;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .country-card-content {
+    padding: 30px;
+  }
+}
+
+/* TELEFONAI */
+
+@media (max-width: 600px) {
+  .country-card {
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-    color: #f8fafc;
-    transition: transform 0.2s, border-color 0.2s;
   }
-  
-  .country-card:hover {
-    transform: translateY(-4px);
-    border-color: #7277db;
+
+  .country-card-visual {
+    min-height: 280px;
+    padding: 22px;
   }
-  
-  .country-flag {
-    display: block;
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 1px solid #43506a;
+
+  .country-visual-label {
+    top: 18px;
+    left: 18px;
+    font-size: 10px;
   }
-  
-  .country-card h2 {
-    margin: 20px 0 6px;
-    font-size: 27px;
-    font-weight: 750;
-    letter-spacing: -0.7px;
-    color: #ffffff;
+
+  .country-flag-frame {
+    width: min(100%, 230px);
+    padding: 14px;
   }
-  
-  .country-region {
-    margin: 0 0 22px;
-    color: #a5b4d2;
-    font-size: 13px;
+
+  .country-visual-bottom {
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
   }
-  
-  .country-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid #34415a;
+
+  .country-visual-caption {
+    display: none;
   }
-  
-  .country-info span {
-    color: #a5b4d2;
-    font-size: 14px;
+
+  .country-card-content {
+    padding: 24px 18px;
   }
-  
-  .country-info strong {
-    color: #f1f5f9;
-    font-size: 14px;
-    text-align: right;
+
+  .country-card-header h2 {
+    font-size: 32px;
   }
-  
-  .country-actions {
-    display: flex;
-    gap: 10px;
+
+  .country-info-grid {
+    grid-template-columns: 1fr;
     margin-top: 24px;
   }
-  
+
+  .country-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SUMAŽINTO JUDESIO NUSTATYMAS */
+
+@media (prefers-reduced-motion: reduce) {
+  .country-card,
   .country-actions button {
-    flex: 1;
-    min-height: 45px;
-    padding: 11px 9px;
-    border: 1px solid #5c65a4;
-    border-radius: 10px;
-    background: linear-gradient(
-      135deg,
-      #5b55d6,
-      #475ed1
-    );
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
+    transition: none;
   }
-  
-  .country-actions button:nth-child(2) {
-    background: #263551;
-    color: #c7d2fe;
-  }
-  
+
   .country-actions button:hover {
-    filter: brightness(1.2);
+    transform: none;
   }
-  
-  .country-actions button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .country-message {
-    margin: 16px 0 0;
-    padding: 12px;
-    border-radius: 8px;
-    background: rgba(99, 102, 241, 0.12);
-    color: #c7d2fe;
-    font-size: 13px;
-  }
-  
-  @media (max-width: 420px) {
-    .country-card {
-      padding: 15px;
-    }
-  
-    .country-actions {
-      flex-direction: column;
-    }
-  
-    .country-flag {
-      height: 155px;
-    }
-  }
-  
+}

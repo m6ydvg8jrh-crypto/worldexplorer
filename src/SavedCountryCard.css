@@ -1,78 +1,282 @@
 
+/* WORLD EXPLORER – IŠSAUGOTOS VALSTYBĖS */
+
 .saved-country-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  min-height: 280px;
+  padding: 24px;
+  overflow: hidden;
+
+  color: #f8fafc;
+
+  background: linear-gradient(
+    145deg,
+    rgba(25, 40, 64, 0.96),
+    rgba(11, 21, 39, 0.98)
+  );
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 22px;
+
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.saved-country-card::before {
+  content: "";
+  position: absolute;
+  top: -95px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.12);
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+.saved-country-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.45);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* VIRŠUTINĖ DALIS */
+
+.saved-country-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.saved-country-eyebrow {
+  color: #93c5fd;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.saved-country-code {
+  padding: 7px 11px;
+  border-radius: 9px;
+
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* VALSTYBĖS INFORMACIJA */
+
+.saved-country-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.saved-country-flag-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 78px;
+  height: 78px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(59, 130, 246, 0.16),
+    rgba(139, 92, 246, 0.1)
+  );
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.saved-country-flag {
+  font-size: 44px;
+  line-height: 1;
+}
+
+.saved-country-name {
+  min-width: 0;
+}
+
+.saved-country-name h3 {
+  margin: 0 0 7px;
+
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+
+  overflow-wrap: anywhere;
+}
+
+.saved-country-name p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* STATUSAS */
+
+.saved-country-status-row {
+  display: flex;
+  align-items: center;
+}
+
+.saved-country-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.saved-country-status span {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.saved-country-status.visited {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.13);
+  border: 1px solid rgba(52, 211, 153, 0.24);
+}
+
+.saved-country-status.wishlist {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.13);
+  border: 1px solid rgba(165, 180, 252, 0.24);
+}
+
+/* APATINĖ DALIS */
+
+.saved-country-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: auto;
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.saved-country-date {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.saved-country-date span {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.saved-country-date strong {
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* PAŠALINIMO MYGTUKAS */
+
+.saved-country-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 38px;
+  padding: 9px 13px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  background: rgba(239, 68, 68, 0.08);
+
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.saved-country-delete span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.saved-country-delete:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+.saved-country-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MAŽESNI EKRANAI */
+
+@media (max-width: 600px) {
+  .saved-country-card {
+    min-height: 260px;
     padding: 20px;
-    background: #151f32;
-    border: 1px solid #34415b;
-    border-radius: 16px;
-    transition: border-color 0.2s;
+    gap: 20px;
   }
-  
-  .saved-country-card:hover {
-    border-color: #747bd8;
+
+  .saved-country-flag-box {
+    width: 66px;
+    height: 66px;
+    border-radius: 14px;
   }
-  
-  .saved-country-details {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  
+
   .saved-country-flag {
-    font-size: 36px;
-    line-height: 1;
+    font-size: 38px;
   }
-  
-  .saved-country-details h3 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    color: #f8fafc;
+
+  .saved-country-name h3 {
+    font-size: 20px;
   }
-  
-  .saved-country-details p {
-    margin: 0;
-    color: #94a3b8;
-    font-size: 12px;
+
+  .saved-country-footer {
+    flex-wrap: wrap;
   }
-  
-  .saved-country-status {
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saved-country-card {
+    transition: none;
   }
-  
-  .saved-country-status.visited {
-    background: rgba(52, 211, 153, 0.12);
-    color: #6ee7b7;
+
+  .saved-country-card:hover {
+    transform: none;
   }
-  
-  .saved-country-status.wishlist {
-    background: rgba(165, 180, 252, 0.12);
-    color: #c7d2fe;
-  }
-  
-  .saved-country-delete {
-    padding: 9px 12px;
-    border: 1px solid #693949;
-    border-radius: 8px;
-    background: rgba(185, 28, 28, 0.13);
-    color: #fca5a5;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  .saved-country-delete:hover {
-    background: rgba(185, 28, 28, 0.26);
-  }
-  
-  .saved-country-delete:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
+}

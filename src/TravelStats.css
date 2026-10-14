@@ -1,92 +1,351 @@
 
+/* WORLD EXPLORER – KELIONIŲ STATISTIKA */
+
 .travel-stats {
-    margin-top: 40px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ANTRAŠTĖ */
+
+.stats-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.stats-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.stats-heading h2 {
+  margin: 0 0 8px;
+
+  color: #f8fafc;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+}
+
+.stats-heading p {
+  margin: 0;
+
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* KORTELIŲ IŠDĖSTYMAS */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* BENDRA KORTELĖ */
+
+.stats-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+
+  min-height: 145px;
+  padding: 26px;
+
+  overflow: hidden;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(22, 37, 61, 0.95),
+    rgba(9, 20, 38, 0.95)
+  );
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(96, 165, 250, 0.45);
+
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(59, 130, 246, 0.08);
+}
+
+/* SUBTILUS KORTELĖS ŠVYTĖJIMAS */
+
+.stats-card::before {
+  content: "";
+
+  position: absolute;
+  width: 150px;
+  height: 150px;
+
+  top: -75px;
+  right: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(96, 165, 250, 0.08);
+  filter: blur(35px);
+
+  pointer-events: none;
+}
+
+.stats-visited::before {
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.stats-wishlist::before {
+  background: rgba(139, 92, 246, 0.14);
+}
+
+.stats-total::before {
+  background: rgba(59, 130, 246, 0.14);
+}
+
+/* IKONOS */
+
+.stats-icon {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+
+  min-width: 64px;
+
+  border-radius: 17px;
+  font-size: 29px;
+  font-weight: 700;
+}
+
+/* APLANKYTA – ŽALIA */
+
+.visited-icon {
+  color: #34d399;
+
+  background: linear-gradient(
+    145deg,
+    rgba(16, 185, 129, 0.28),
+    rgba(6, 95, 70, 0.18)
+  );
+}
+
+/* PLANUOJAMA – VIOLETINĖ */
+
+.wishlist-icon {
+  color: #c4b5fd;
+
+  background: linear-gradient(
+    145deg,
+    rgba(139, 92, 246, 0.28),
+    rgba(91, 33, 182, 0.18)
+  );
+}
+
+/* IŠ VISO – MĖLYNA */
+
+.total-icon {
+  color: #60a5fa;
+
+  background: linear-gradient(
+    145deg,
+    rgba(59, 130, 246, 0.28),
+    rgba(30, 64, 175, 0.18)
+  );
+}
+
+/* SKAIČIAI IR TEKSTAS */
+
+.stats-content {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.stats-card .stats-number {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 38px;
+  font-weight: 850;
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+}
+
+.stats-label {
+  color: #f1f5f9;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.stats-description {
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* DEKORATYVINĖ RODYKLĖ */
+
+.stats-arrow {
+  position: absolute;
+  z-index: 1;
+
+  top: 18px;
+  right: 20px;
+
+  color: #64748b;
+
+  font-size: 19px;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.stats-card:hover .stats-arrow {
+  transform: translate(2px, -2px);
+  color: #93c5fd;
+}
+
+/* PLANŠETĖS */
+
+@media (max-width: 1050px) {
+  .stats-grid {
+    gap: 12px;
   }
-  
-  .stats-heading {
-    margin-bottom: 22px;
+
+  .stats-card {
+    padding: 20px 16px;
+    gap: 12px;
   }
-  
-  .stats-heading h2 {
-    margin: 0 0 8px;
-    color: #f8fafc;
-    font-size: 25px;
-    letter-spacing: -0.6px;
+
+  .stats-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+
+    font-size: 24px;
+    border-radius: 14px;
   }
-  
-  .stats-heading p {
-    margin: 0;
-    color: #94a3b8;
+
+  .stats-card .stats-number {
+    font-size: 32px;
+  }
+
+  .stats-label {
     font-size: 14px;
   }
-  
+
+  .stats-description {
+    font-size: 11px;
+  }
+}
+
+/* TELEFONAI */
+
+@media (max-width: 700px) {
+  .stats-heading {
+    margin-bottom: 18px;
+  }
+
   .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-  }
-  
-  .stats-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
     gap: 12px;
-    padding: 25px;
-    background: linear-gradient(145deg, #1b2942, #131d30);
-    border: 1px solid #34435e;
+  }
+
+  .stats-card {
+    min-height: 108px;
+    padding: 18px 20px;
+    gap: 16px;
     border-radius: 18px;
-    transition: transform 0.2s, border-color 0.2s;
   }
-  
-  .stats-card:hover {
-    transform: translateY(-3px);
-    border-color: #747bd8;
-  }
-  
+
   .stats-icon {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 11px;
-    font-size: 22px;
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    font-size: 26px;
   }
-  
-  .visited-icon {
-    background: rgba(52, 211, 153, 0.13);
-    color: #34d399;
+
+  .stats-card .stats-number {
+    font-size: 34px;
   }
-  
-  .wishlist-icon {
-    background: rgba(165, 180, 252, 0.13);
-    color: #a5b4fc;
+
+  .stats-label {
+    font-size: 15px;
   }
-  
-  .total-icon {
-    background: rgba(96, 165, 250, 0.13);
-    color: #60a5fa;
+
+  .stats-description {
+    font-size: 12px;
   }
-  
-  .stats-card strong {
-    color: #ffffff;
-    font-size: 38px;
-    font-weight: 800;
-    line-height: 1;
+}
+
+/* MAŽI TELEFONAI */
+
+@media (max-width: 380px) {
+  .stats-card {
+    padding: 16px;
+    gap: 12px;
   }
-  
-  .stats-card > span:last-child {
-    color: #a9b8d1;
-    font-size: 13px;
+
+  .stats-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
   }
-  
-  @media (max-width: 650px) {
-    .stats-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-  
-    .stats-card {
-      padding: 20px;
-    }
+
+  .stats-card .stats-number {
+    font-size: 30px;
   }
-  
+}
+
+/* SUMAŽINTO JUDESIO NUSTATYMAS */
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-card,
+  .stats-arrow {
+    transition: none;
+  }
+
+  .stats-card:hover {
+    transform: none;
+  }
+}

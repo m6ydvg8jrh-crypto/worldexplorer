@@ -1,33 +1,37 @@
 
+import "./CountryFilter.css";
+
 function CountryFilter({ filter, onFilterChange }) {
-    return (
-      <div className="country-filter">
+  const filters = [
+    { value: "all", label: "Visos", icon: "◎" },
+    { value: "visited", label: "Aplankytos", icon: "✓" },
+    { value: "wishlist", label: "Planuojamos", icon: "☆" },
+  ];
+
+  return (
+    <div
+      className="country-filter"
+      role="group"
+      aria-label="Valstybių filtravimas"
+    >
+      {filters.map((item) => (
         <button
+          key={item.value}
           type="button"
-          onClick={() => onFilterChange("all")}
-          className={filter === "all" ? "active" : ""}
+          className={`country-filter-button ${
+            filter === item.value ? "active" : ""
+          }`}
+          onClick={() => onFilterChange(item.value)}
+          aria-pressed={filter === item.value}
         >
-          Visos
+          <span className="filter-icon" aria-hidden="true">
+            {item.icon}
+          </span>
+          <span>{item.label}</span>
         </button>
-  
-        <button
-          type="button"
-          onClick={() => onFilterChange("visited")}
-          className={filter === "visited" ? "active" : ""}
-        >
-          Aplankytos
-        </button>
-  
-        <button
-          type="button"
-          onClick={() => onFilterChange("wishlist")}
-          className={filter === "wishlist" ? "active" : ""}
-        >
-          Planuojamos
-        </button>
-      </div>
-    );
-  }
-  
-  export default CountryFilter;
-  
+      ))}
+    </div>
+  );
+}
+
+export default CountryFilter;
